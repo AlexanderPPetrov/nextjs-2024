@@ -11,8 +11,13 @@ function ProductList({ productList }: Props) {
                                     product={product}/>
         })
     }
-    return <div>
-        { getProducts() }
+    return <div className={"container mx-auto p-2"}>
+        <div className={"flex flex-wrap -mx-2"}>
+            {getProducts()}
+        </div>
     </div>
+
+
 }
+
 export default ProductList
