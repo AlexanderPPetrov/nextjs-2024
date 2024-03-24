@@ -1,7 +1,8 @@
 'use client' // :(
 import { Form, Button } from 'react-bootstrap'
 import * as yup from "yup"
-import {Formik, useFormik} from "formik";
+import {useFormik} from "formik";
+import { useEffect } from "react";
 function LoginForm() {
     //TODO add validation and handling
 
@@ -12,9 +13,21 @@ function LoginForm() {
         password: '',
     }
 
+    //TODO add i18n to project and useTranslation to pass translatable validation errors
+
+    const regex = /^[a-zA-Z0-9 !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+
     const validationSchema = yup.object({
-        email: yup.string().required().email().max(50),
-        password: yup.string().required().min(6).max(30)
+        email: yup.string()
+            .required("Имейл полето е задължително")
+            .email("Моля въведете валиден имейл")
+            .matches(regex, {message: "Странни символи не са позволени"})
+            .max(50, "Това поле не може да е повече от 50 символа"),
+        password: yup.string()
+            .required("Паролата е задължително поле")
+            .matches(regex, {message: "Странни символи не са позволени"})
+            .min(6, "Паролата трябва да е поне 6 символа")
+            .max(30, "Паролата не може да е повече от 30 символа")
     })
 
     const formik = useFormik({
