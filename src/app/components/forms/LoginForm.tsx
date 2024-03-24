@@ -47,6 +47,7 @@ function LoginForm() {
                         <Form.Control type="email"
                                       name="email"
                                       placeholder="Enter email"
+                                      data-testid="login-email"
                                       value={formik.values.email}
                                       onChange={formik.handleChange}
                                       isInvalid={Boolean(formik.errors.email)}
@@ -59,6 +60,7 @@ function LoginForm() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password"
                                       name="password"
+                                      data-testid="login-password"
                                       placeholder="Password"
                                       value={formik.values.password}
                                       onChange={formik.handleChange}
@@ -68,7 +70,9 @@ function LoginForm() {
                             {formik.errors.password}
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button data-testid="login-button"
+                            variant="primary"
+                            type="submit">
                         Login
                     </Button>
                 </Form>
